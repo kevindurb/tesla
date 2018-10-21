@@ -8,11 +8,16 @@
     "leaflet": "^1.3.4",
     "leaflet-geosearch": "^2.7.0",
     "leaflet-routing-machine": "^3.2.12",
+    "ramda": "^0.25.0",
     "react": "^16.5.2",
     "react-bootstrap": "^1.0.0-beta.1",
     "react-dom": "^16.5.2",
     "react-leaflet": "^2.1.0",
-    "react-scripts": "2.0.5"
+    "react-redux": "^5.0.7",
+    "react-scripts": "2.0.5",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0"
   },
   "scripts": {
     "start": "NODE_ENV=development electron src/desktop.js",

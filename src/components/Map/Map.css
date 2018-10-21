@@ -1,0 +1,34 @@
+.Map {
+  position: relative;
+  width: 100%;
+  height: 100%
+}
+
+.leaflet-container {
+  position: relative;
+  width: 100%;
+  height: 100%
+}
+
+.Map__searchInput {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 500;
+  width: 300px;
+}
+
+.Map__results {
+  position: absolute;
+  top: 70px;
+  right: 24px;
+  z-index: 500;
+  width: 300px;
+}
+
+.Map__currentLocation {
+  position: absolute;
+  top: 24px;
+  right: 340px;
+  z-index: 500;
+}
