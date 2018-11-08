@@ -1,6 +1,10 @@
+require('dotenv').config();
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
+
+const database = require('./src/database/database');
+
 const {
   default: installExtension,
   REACT_DEVELOPER_TOOLS,
@@ -8,14 +12,13 @@ const {
 } = require('electron-devtools-installer');
 require('electron-debug')();
 
-process.env.GOOGLE_API_KEY = 'AIzaSyBRkVOSiB4LW-NdatSTsfMbyPWxUSa1CFA';
+database.runUpgrades()
+  .then(() => console.log('DONE'));
+
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-if (isDevelopment) {
-}
-
 let startUrl = url.format({
-  pathname: path.join(__dirname, '/../build/index.html'),
+  pathname: path.join(__dirname, '/build/index.html'),
   protocol: 'file:',
   slashes: true
 });
@@ -31,8 +34,11 @@ function createWindow() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
   mainWindow.loadURL(startUrl);
   if (isDevelopment) {
-    installExtension(REACT_DEVELOPER_TOOLS);
-    installExtension(REDUX_DEVTOOLS);
+    Promise.all([
+      installExtension(REACT_DEVELOPER_TOOLS),
+      installExtension(REDUX_DEVTOOLS),
+    ]).then(() => null)
+      .catch(() => null);
 
     mainWindow.once('show', () => {
       mainWindow.webContents.openDevTools();

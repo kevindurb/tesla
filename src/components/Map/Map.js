@@ -9,6 +9,7 @@ import {
   ListGroupItem,
 } from 'react-bootstrap';
 
+import Routing from './components/Routing';
 import car from '../../images/car.png';
 import place from '../../images/place.png';
 import currentLocation from '../../images/current_location.png';
@@ -131,6 +132,20 @@ class Map extends React.PureComponent {
     );
   }
 
+  renderRouting() {
+    if (!this.props.selectedResult) return null;
+    const selectedResult = this.props.selectedResult;
+    const currentLocation = this.props.currentLocation;
+    return (
+      <Routing
+        waypoints={[
+          currentLocation,
+          [selectedResult.y, selectedResult.x],
+        ]}
+      />
+    );
+  }
+
   render() {
     return (
       <div className="Map">
@@ -147,6 +162,7 @@ class Map extends React.PureComponent {
             position={this.props.currentLocation}
           />
           {this.renderSelectedMarker()}
+          {this.renderRouting()}
         </Leaflet.Map>
         <FormControl
           className="Map__searchInput"
